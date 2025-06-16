@@ -6,6 +6,7 @@ function App() {
   const [word, setWord] = useState('');
   const [anagrams, setAnagrams] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchSubmitted, setSearchSubmitted] = useState(false);
 
   const handleImport = async () => {
     try {
@@ -32,12 +33,14 @@ function App() {
   const handleAnagramSearch = async () => {
     if (!word.trim()) {
       setAnagrams([]);
+      setSearchSubmitted(false);
       return;
     }
 
     try {
       const result = await findAnagrams(word);
       setAnagrams(result.anagrams);
+      setSearchSubmitted(true);
     } catch (error) {
       console.error(error);
       setAnagrams([]);
@@ -86,12 +89,15 @@ function App() {
             }}
           />
           <button onClick={handleAnagramSearch}>Search</button>
-          {anagrams.length > 0 && (
+          {anagrams?.length > 0 && (
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {anagrams.map((anagram, index) => (
                 <li key={index}>{anagram}</li>
               ))}
             </ul>
+          )}
+          {anagrams?.length === 0 && searchSubmitted && (
+            <p>No anagrams found.</p>
           )}
         </section>
       </div>
