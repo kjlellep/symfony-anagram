@@ -1,5 +1,19 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+#controllers:
+#    resource:
+#        path: ../src/Controller/
+#        namespace: App\Controller
+#    type: attribute
+
+import_wordbase:
+  path: /api/import-wordbase
+  controller: App\Controller\WordImportController::import
+  methods: ['GET']
+  defaults:
+    _limiter: api_global
+
+find_anagram:
+  path: /api/anagram
+  controller: App\Controller\AnagramController::findAnagram
+  methods: ['GET']
+  defaults:
+    _limiter: api_global

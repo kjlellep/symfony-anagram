@@ -1,0 +1,55 @@
+nelmio_api_doc:
+  documentation:
+    openapi: 3.0.0
+    info:
+      title: Anagram Finder API
+      version: 1.0.0
+
+    paths:
+      /api/anagram:
+        get:
+          summary: Find anagrams for given word
+          parameters:
+            - name: word
+              in: query
+              required: true
+              schema:
+                type: string
+          responses:
+            '200':
+              description: Successful anagram lookup
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      input:
+                        type: string
+                      anagrams:
+                        type: array
+                        items:
+                          type: string
+            '400':
+              description: Missing word parameter
+
+      /api/import-wordbase:
+        get:
+          summary: Import wordbase
+          responses:
+            '200':
+              description: Successful import
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      imported:
+                        type: integer
+                      status:
+                        type: string
+                      existing_rows:
+                        type: integer
+            '400':
+              description: Import not allowed
+            '500':
+              description: Download or import failure
