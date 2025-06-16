@@ -29,10 +29,15 @@ services:
     build:
       context: .
       dockerfile: docker/frontend/Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL}
     ports:
-      - "5173:5173"
-    stdin_open: true
-    tty: true
+      - "5173:3000"
+    #environment:
+    #  - VITE_API_URL=${VITE_API_URL}
+    depends_on:
+      - php
+
 
 volumes:
   db_data:
