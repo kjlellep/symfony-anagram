@@ -66,6 +66,10 @@ docker compose up --build
     * React frontend (localhost:5173)
     * MySQL database (localhost:3306 inside Docker)
 
+After the very first build on local machine run
+```bash
+docker compose exec php composer install
+```
 
 ### Initialize database
 
