@@ -66,10 +66,12 @@ docker compose up --build
     * React frontend (localhost:5173)
     * MySQL database (localhost:3306 inside Docker)
 
-After the very first build on local machine run
+After the very first build on a local machine (or after switching branches that change docker-compose.yml), run
 ```bash
 docker compose exec php composer install
 ```
+This installs PHP dependencies inside the container.
+If you later pull updates or switch branches that modify Docker volumes or service definitions, re-running this command ensures all required vendor packages are present.
 
 ### Initialize database
 
